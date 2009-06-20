@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Canvas: CSS Sprites Generator</title>
+<link rel="stylesheet" href="css/reset.css" type="text/css" />
+<link rel="stylesheet" href="css/varied960.css" type="text/css" />
+<link rel="stylesheet" href="css/text.css" type="text/css" />
+<link rel="stylesheet" href="css/black-tie/jquery-ui-1.7.1.custom.css" type="text/css" />
+<!--[if IE]><script src="excanvas.js"></script><![endif]-->
+<style type="text/css">
+html {
+	height: 100%;
+}
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	color: #eeeeee;
+	background: #333333 url(css/black-tie/images/ui-bg_diagonals-thick_8_333333_40x40.png) 50% 50% repeat;
+}
+
+
+#content {
+	position: relative;
+	width: 945px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+h1 {
+	position: absolute;
+	top: 20px;
+}
+
+#tabs {
+	position: absolute;
+	top: 72px;
+	bottom: 20px;
+	width: 100%;
+}
+
+#tabs .ui-tabs-panel {
+	overflow: auto;
+	padding: 1em 0;
+	position: absolute;
+	top: 46px;
+	bottom: 4px;
+	width: 945px; /* scroll spaces */
+}
+
+form > * {
+	clear: both;
+}
+
+form > p > label, form > p > span {
+	margin-bottom: 20px;
+}
+
+.col {
+	margin-bottom: 20px;
+}
+
+.box {
+	height: 120px;
+	overflow: auto;
+	border: 1px dashed #999999;
+}
+
+.no-image {
+	font-weight: bold;
+}
+
+.ui-widget > .ui-icon {
+	float: left; margin: 4px 4px 3px;
+}
+
+#url, #urls {
+	font-family: monospace;
+	width: 80%;
+	white-space: nowrap;
+}
+
+#config-bgcolor, #config-spacingcolor {
+	font-family: monospace;
+}
+
+#demo-set textarea {
+	display: none;
+}
+
+#images-container {
+	height: 80%;
+	position: relative;
+	background-color: #cccccc;
+	overflow: auto;
+	border-color: #666666 #ffffff #ffffff #666666;
+	border-style: solid;
+	border-width: 2px;
+}
+
+#images {
+	display: block;
+	margin: 20px 0 0 20px;
+	padding: 0;
+	list-style: none;
+	border: 1px dashed #999999;
+}
+
+#visible-hack {
+	display: block;
+	position: absolute;
+	right: 0; bottom: 0;
+	width: 1px; height: 1px;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+.image-new-ok {
+	display: none;
+	font-weight: bold;
+}
+
+#images li {
+	float: left;
+	cursor: move;
+	margin: 0;
+	/*line-height: 1px /* size hack */
+	font: 10px/1px monospace;
+}
+
+/*#sprites-data, #sprites-css {
+	white-space: nowrap;
+}*/
+
+.transparent-checker {
+	background: #ffffff url('http://upload.wikimedia.org/wikipedia/commons/5/5d/Checker-16x16.png');
+}
+
+</style>
+<body>
+<div id="content">
+	<h1>Canvas: CSS Sprites Generator</h1>
+	<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+			<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active ui-state-disabled"><a href="#welcome">Welcome</a></li>
+			<li class="ui-state-default ui-corner-top ui-state-disabled"><a href="#options">Options</a></li>
+			<li class="ui-state-default ui-corner-top ui-state-disabled"><a href="#addimage">Add Images</a></li>
+			<li class="ui-state-default ui-corner-top ui-state-disabled"><a href="#preview">Preview</a></li>
+			<li class="ui-state-default ui-corner-top ui-state-highlight ui-state-disabled"><a href="#result">Result</a></li>
+		</ul>
+		<div id="welcome" class="container_10 ui-tabs-panel ui-widget-content ui-corner-bottom">
+			<div class="grid_7">
+				<h2>Build your own CSS Sprites with <code>&lt;canvas&gt;</code>.</h2>
+				<noscript>
+					<p class="no-image ui-widget ui-state-error ui-corner-all"><span class="ui-icon ui-icon-alert">[Alert]</span> You have to turn on Javascript in order to use this tool.</p>
+				</noscript>
+				<p class="ui-widget ui-state-highlight ui-corner-all">
+					<span class="ui-icon ui-icon-info">[Info]</span>
+					<strong>To Opera and Webkit users:</strong> you can play with this tool but you won't be able to save the composed image due to lack of <strong>"Save As..."</strong> command in the context menu.
+				</p>
+				<p>This tool can help you make CSS Sprites with <code>&lt;canvas&gt;</code> support in browsers.
+				As a web designer/developer, your browser <em>should</em> support canvas. Consider quit your job if it doesn't.</p>
+				<p>For more information about CSS Sprites, please read <a href="http://css-tricks.com/css-sprites/">this article from CSS tricks</a>.</p>
+				<p><strong>The tool generates result on the fly.</strong> Feel free to switch between tabs when making your sprite image.</p>
+				<p><small>This tool is made by <a href="http://timc.idv.tw/">timdream</a>.</small></p>
+			</div>
+			<div class="grid_3">
+				<p><a href="http://www.flickr.com/photos/kelsoglover/3252440330/"><img src="http://farm4.static.flickr.com/3015/3252440330_bdab1de4c8_m.jpg" alt="A wide canvas, covered with flowers" /></a></p>
+				<p>by Kelsey Shay, CC-by-sa-2.0-en</p>
+			</div>
+		</div>
+		<div id="options" class="container_10 ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+			<h2 class="grid_10">Spacing</h2>
+			<p class="grid_2 col">
+				<label for="config-hspacing">Horizontal Image Spacing</label>
+			</p>
+			<p class="grid_8 col">
+				<span class="alpha omega grid_8"><input type="text" size="5" id="config-hspacing" value="2" /> px</span>
+				<span class="alpha omega grid_8">Make sure horiontal spacing is large enough to aviod Safari image repeating bug, if you wish to use the sprite image for CSSes other than privided.</span>
+			</p>
+			<hr class="clear" />
+			<p class="grid_2 col">
+				<label for="config-vspacing">Vertial Image Spacing</label>
+			</p>
+			<p class="grid_8 col">
+				<span class="alpha omega grid_8"><input type="text" size="5" id="config-vspacing" value="2" /> px</span>
+			</p>
+			<h2 class="grid_10">Colors</h2>
+			<p class="grid_2 col">
+				<label for="config-bgcolor">Background color</label>
+			</p>
+			<p class="grid_8 col">
+				<span class="alpha omega grid_8"><input type="text" size="10" id="config-bgcolor" value="#ffffff" /></span>
+				<label class="alpha omega grid_8"><input type="checkbox" id="config-bgcolor-transparent" checked="checked" /> Transparent</label>
+			</p>
+			<hr class="clear" />
+			<p class="grid_2 col">
+				<label for="config-spacingcolor">Spacing color</label>
+			</p>
+			<p class="grid_8 col">
+				<span class="alpha omega grid_8"><input type="text" size="10" id="config-spacingcolor" value="#ffffff" /></span>
+				<label class="alpha omega grid_8"><input type="checkbox" id="config-spacingcolor-transparent" /> Transparent</label>
+			</p>
+			<hr class="clear" />
+		</div>
+		<div id="addimage" class="container_10 ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+			<div class="grid_5">
+				<h2>One at a time</h2>
+				<p>Copy and paste URL of the image, one at a time. For security reason, you cannot access local image from here.</p>
+				<form action="#" method="get" id="image-new">
+					<p>
+						<label class="alpha grid_1" for="url">URL</label>
+						<span class="omega grid_4"><input type="text" value="" id="url" size="40"></span>
+					</p>
+					<p>
+						<label class="alpha grid_1" class="grid_2" for="class-name">className</label>
+						<span class="omega grid_4"><input type="text" value="" id="class-name" size="20"></span>
+					</p>
+					<p class="alpha omega grid_4 prefix_1"><input type="submit" value="Add Image" /> <span class="image-new-ok">OK!</span></p>
+				</form>
+			</div>
+			<div class="grid_5">
+				<h2>Be greedy</h2>
+				<p>Paste URLs on the textbox below, in the form of <br/><code>my-class: http://.../</code>.</p>
+				<form action="#" method="get" id="image-bulknew">
+					<p>
+						<textarea id="urls" rows="4" cols="40"></textarea>
+					</p>
+					<p><input type="submit" value="Add Images" /> <span class="image-new-ok">OK!</span></p></p>
+				</form>
+			</div>
+			<div class="grid_10" id="demo-set">
+				<h2>Predefined sets</h2>
+				<ul>
+					<li>
+						<strong>favicons</strong> - favicons from various websites.
+						<textarea>wordpress: http://www.wordpress.org/favicon.ico
+wordpress-com: http://www.wordpress.com/favicon.ico
+faceboook: http://www.facebook.com/favicon.ico
+twitter: http://twitter.com/favicon.ico
+anobii: http://www.anobii.com/favicon.ico
+flickr: http://www.flickr.com/favicon.ico
+netvibes: http://www.netvibes.com/favicon.ico
+plurk: http://www.plurk.com/favicon.ico
+</textarea>
+						<input type="button" value="Add" />
+					</li>
+					<li>
+						<strong>Mozilla zoo</strong> - Logos from Mozilla applications.
+						<textarea>
+firefox: http://www.mozilla.org/images/product-firefox-50.png
+thunderbird: http://www.mozilla.org/images/product-thunderbird-50.png
+sunbird: http://www.mozilla.org/images/sunbird_logo-50.png
+camino: http://www.mozilla.org/images/product-camino.png
+fennec: http://www.mozilla.org/images/fennec.png
+</textarea>
+						<input type="button" value="Add" />
+					</li>
+					<li>
+						<strong>Data URL</strong> - Add an image using <code>data:</code> url.
+						<textarea>
+</textarea>
+						<input type="button" value="Add" />
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="preview" class="container_10 ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+			<p class="no-image grid_10 ui-widget ui-state-error ui-corner-all"><span class="ui-icon ui-icon-alert">[Alert]</span> You have not yet add any image.</p>
+			<div class="grid_10">
+				<ul>
+					<li>Drag the images to sort, double click to delete.</li>
+					<li>You may also resize the sprite image. Width is restricted to 2042px to avoid Opera bug.</li>
+				</ul>
+			</div>
+			<div id="images-container" class="grid_10">
+			</div>
+		</div>
+		<div id="result" class="container_10 ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+			<p class="no-image grid_10 ui-widget ui-state-error ui-corner-all"><span class="ui-icon ui-icon-alert">[Alert]</span> You have not yet add any image.</p>
+			<div class="grid_6 col">
+				<h2>Sprite Image</h2>
+				<!--<p>Save this image with help from <a href="http://www.nihilogic.dk/labs/canvas2image/">Jacob Seidelin's canvas2image</a>: <input id="save-canvas" type="button" value="Save Image" />.</p>-->
+				<p>Firefox users can right click the <code>&lt;canvas&gt;</code> element on the right to save the image.</p>
+			</div>
+			<div class="grid_4 col box" id="sprite-container">
+				<canvas class="transparent-checker" id="sprites">?</canvas>
+			</div>
+			<div class="grid_6 col">
+				<h2>CSS</h2>
+				<p>You should now be able to use any class as images, like <code>&lt;span class="sprite my-class"&gt;my icon&lt;/span&gt;</code></p>
+			</div>
+			<div class="grid_4 col box">
+				<pre id="sprites-css"></pre>
+			</div>
+			<div class="grid_6 col">
+				<h2>Data</h2>
+				<p>Save this text chunk to re-use image list with this tool (paste it into "Be greedy" section).</p>
+			</div>
+			<div class="grid_4 col box">
+				<pre id="sprites-data"></pre>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="visible-hack">
+	<ul id="images">
+	</ul>
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+<!--<script type="text/javascript" src="canvas2image.js" defer="defer"></script>
+<script type="text/javascript" src="base64.js" defer="defer"></script>-->
+</body>
+</html>
