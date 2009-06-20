@@ -242,7 +242,7 @@ var CanvasCS = {
 		);
 		/* Generate CSS */
 		var data = '';
-		var css = '.sprite {display: block\; background: transparent url(\'...\') no-repeat; text-indent: -1000px; }\n';
+		var css = '.sprite {display: block\; background: transparent url(\'...\') no-repeat; text-indent: -10000px; }\n';
 		$.each(
 			d,
 			function (i, o) {
