@@ -206,10 +206,10 @@ var CanvasCS = {
 				}
 				var imageData = $(this).offset();
 				imageData = [
-					imageData.left - parentOffset.left,
-					imageData.top - parentOffset.top,
-					$(this).width(),
-					$(this).height(),
+					parseInt(imageData.left - parentOffset.left),
+					parseInt(imageData.top - parentOffset.top),
+					parseInt($(this).width()),
+					parseInt($(this).height()),
 					$(this).data('name'),
 					$(this).data('url')
 				];
