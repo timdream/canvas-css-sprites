@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-tw" lang="zh-tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Canvas: CSS Sprite 製造機</title>
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/varied960.css" type="text/css" />
+<link rel="stylesheet" href="../css/text.css" type="text/css" />
+<link rel="stylesheet" href="../css/black-tie/jquery-ui-1.7.1.custom.css" type="text/css" />
+<link rel="stylesheet" href="../css/style.css" type="text/css" />
+<!--[if IE]><script src="../excanvas.js"></script><![endif]-->
+<body>
+<div id="content">
+	<h1>Canvas: CSS Sprite 製造機</h1>
+	<ul class="langsel">
+		<li lang="en"><a href="../en/">English</a></li>
+		<li lang="zh-tw">正體中文</li>
+	</ul>
+	<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+			<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active ui-state-disabled"><a href="#welcome">歡迎使用</a></li>
+			<li class="ui-state-default ui-corner-top ui-state-disabled"><a href="#options">設定</a></li>
+			<li class="ui-state-default ui-corner-top ui-state-disabled"><a href="#addimage">新增圖片</a></li>
+			<li class="ui-state-default ui-corner-top ui-state-disabled"><a href="#preview">預覽</a></li>
+			<li class="ui-state-default ui-corner-top ui-state-highlight ui-state-disabled"><a href="#result">結果</a></li>
+		</ul>
+		<div id="welcome" class="container_10 ui-tabs-panel ui-widget-content ui-corner-bottom">
+			<div class="grid_7">
+				<h2>使用 <code>&lt;canvas&gt;</code> 製作您的 CSS Sprite。</h2>
+				<noscript>
+					<p class="no-image ui-widget ui-state-error ui-corner-all"><span class="ui-icon ui-icon-alert">[Alert]</span> 欲使用此工具請先啟用 Javascript。</p>
+				</noscript>
+				<p class="ui-widget ui-state-highlight ui-corner-all">
+					<span class="ui-icon ui-icon-info">[Info]</span>
+					<strong>Opera 與 Webkit 使用者請注意：</strong>您可以玩玩看此工具，但是因為右鍵選單沒有<strong>圖片另存新檔</strong>指令，所以做好的圖片存不起來。
+				</p>
+				<p>此工具使用瀏覽器的 <code>&lt;canvas&gt;</code> 支援製作 CSS Sprite。
+				身為一個 Web Designer/Developer，如果您的瀏覽器還不支援 canvas 的話，您還是快換工作吧。</p>
+				<p>更多關於 CSS Sprite 的資訊可以參考<a href="http://css-tricks.com/css-sprites/">這篇文章（英文）</a>。</p>
+				<p><strong>此工具會即時產生結果。</strong>歡迎在各分頁間來回瀏覽，重複調整。</p>
+				<p><small>此工具由<a href="http://timc.idv.tw/">timdream</a>製作。</small></p>
+			</div>
+			<div class="grid_3">
+				<p><a href="http://www.flickr.com/photos/kelsoglover/3252440330/"><img src="http://farm4.static.flickr.com/3015/3252440330_bdab1de4c8_m.jpg" alt="A wide canvas, covered with flowers" /></a></p>
+				<p>作者：Kelsey Shay，CC-by-sa-2.0-en</p>
+			</div>
+		</div>
+		<div id="options" class="container_10 ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+			<h2 class="grid_10">間距</h2>
+			<p class="grid_2 col">
+				<label for="config-hspacing">水平圖片間距</label>
+			</p>
+			<p class="grid_8 col">
+				<span class="alpha omega grid_8"><input type="text" size="5" id="config-hspacing" value="2" /> px</span>
+				<span class="alpha omega grid_8">如果您要將圖片用在此工具提供的 CSS 原始碼以外的用途的話，請確定水平間距夠大，以免遇到 Safari 的圖片重複 bug。</span>
+			</p>
+			<hr class="clear" />
+			<p class="grid_2 col">
+				<label for="config-vspacing">垂直圖片間距</label>
+			</p>
+			<p class="grid_8 col">
+				<span class="alpha omega grid_8"><input type="text" size="5" id="config-vspacing" value="2" /> px</span>
+			</p>
+			<h2 class="grid_10">彩色</h2>
+			<p class="grid_2 col">
+				<label for="config-bgcolor">背景彩色</label>
+			</p>
+			<p class="grid_8 col">
+				<span class="alpha omega grid_8"><input type="text" size="10" id="config-bgcolor" value="#ffffff" /></span>
+				<label class="alpha omega grid_8"><input type="checkbox" id="config-bgcolor-transparent" checked="checked" /> 使用透明</label>
+			</p>
+			<hr class="clear" />
+			<p class="grid_2 col">
+				<label for="config-spacingcolor">間距彩色</label>
+			</p>
+			<p class="grid_8 col">
+				<span class="alpha omega grid_8"><input type="text" size="10" id="config-spacingcolor" value="#ffffff" /></span>
+				<label class="alpha omega grid_8"><input type="checkbox" id="config-spacingcolor-transparent" /> 使用透明</label>
+			</p>
+			<hr class="clear" />
+		</div>
+		<div id="addimage" class="container_10 ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+			<div class="grid_5">
+				<h2>一個一個來</h2>
+				<p>複製貼上圖片的網址，一個一個來。因為安全限制，您無法使用硬碟內的本地端圖片。</p>
+				<form action="#" method="get" id="image-new">
+					<p>
+						<label class="alpha grid_1" for="url">網址</label>
+						<span class="omega grid_4"><input type="text" value="" id="url" size="40"></span>
+					</p>
+					<p>
+						<label class="alpha grid_1" class="grid_2" for="class-name">className</label>
+						<span class="omega grid_4"><input type="text" value="" id="class-name" size="20"></span>
+					</p>
+					<p class="alpha omega grid_4 prefix_1"><input type="submit" value="新增圖片" /> <span class="image-new-ok">OK！</span></p>
+				</form>
+			</div>
+			<div class="grid_5">
+				<h2>貪心點兒</h2>
+				<p>將網址貼在下面的文字方塊，使用此格式：<br/><code>my-class: http://.../</code>。</p>
+				<form action="#" method="get" id="image-bulknew">
+					<p>
+						<textarea id="urls" rows="4" cols="40"></textarea>
+					</p>
+					<p><input type="submit" value="新增圖片" /> <span class="image-new-ok">OK！</span></p></p>
+				</form>
+			</div>
+			<div class="grid_10" id="demo-set">
+				<h2>預設圖片組</h2>
+				<ul>
+					<li>
+						<strong>favicons</strong> - 來自各網站的 favicon。
+						<textarea>wordpress: http://www.wordpress.org/favicon.ico
+wordpress-com: http://www.wordpress.com/favicon.ico
+facebook: http://www.facebook.com/favicon.ico
+twitter: http://twitter.com/favicon.ico
+anobii: http://www.anobii.com/favicon.ico
+flickr: http://www.flickr.com/favicon.ico
+netvibes: http://www.netvibes.com/favicon.ico
+plurk: http://www.plurk.com/favicon.ico
+</textarea>
+						<input type="button" value="新增" />
+					</li>
+					<li>
+						<strong>Mozilla 動物園</strong> - Mozilla 程式的 Logo。
+						<textarea>
+firefox: http://www.mozilla.org/images/product-firefox-50.png
+thunderbird: http://www.mozilla.org/images/product-thunderbird-50.png
+sunbird: http://www.mozilla.org/images/sunbird_logo-50.png
+camino: http://www.mozilla.org/images/product-camino.png
+fennec: http://www.mozilla.org/images/fennec.png
+</textarea>
+						<input type="button" value="新增" />
+					</li>
+					<li>
+						<strong>Data URL</strong> - 使用 <code>data:</code> 網址新增圖片。
+						<textarea>
+red-dot: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9YGARc5KB0XV+IAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAF1JREFUGNO9zL0NglAAxPEfdLTs4BZM4DIO4C7OwQg2JoQ9LE1exdlYvBBeZ7jqch9//q1uH4TLzw4d6+ErXMMcXuHWxId3KOETnnXXV6MJpcq2MLaI97CER3N0vr4MkhoXe0rZigAAAABJRU5ErkJggg==
+check: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEUAAAD///+l2Z/dAAAAM0lEQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8yw83NDDeNGe4Ug9C9zwz3gVLMDA/A6P9/AFGGFyjOXZtQAAAAAElFTkSuQmCC
+</textarea>
+						<input type="button" value="新增" />
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="preview" class="container_10 ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+			<p class="no-image grid_10 ui-widget ui-state-error ui-corner-all"><span class="ui-icon ui-icon-alert">[Alert]</span> 您還沒有新增任何圖片。</p>
+			<div class="grid_10">
+				<ul>
+					<li>拖曳圖片可以排序，連點兩下刪除。</li>
+					<li>您也可以改變 Sprite 圖片的大小。寬度限制在 2042px 以避免 Opera 的 bug。</li>
+				</ul>
+			</div>
+			<div id="images-container" class="grid_10">
+			</div>
+		</div>
+		<div id="result" class="container_10 ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+			<p class="no-image grid_10 ui-widget ui-state-error ui-corner-all"><span class="ui-icon ui-icon-alert">[Alert]</span> 您還沒有新增任何圖片。</p>
+			<div class="grid_6 col">
+				<h2>Sprite 圖片</h2>
+				<!--<p>Save this image with help from <a href="http://www.nihilogic.dk/labs/canvas2image/">Jacob Seidelin's canvas2image</a>: <input id="save-canvas" type="button" value="Save Image" />.</p>-->
+				<p>Firefox 使用者可以對右邊的 <code>&lt;canvas&gt;</code> 元素按右鍵存檔。</p>
+			</div>
+			<div class="grid_4 col box" id="sprite-container">
+				<canvas class="transparent-checker" id="sprites">?</canvas>
+			</div>
+			<div class="grid_6 col">
+				<h2>CSS</h2>
+				<p>使用這塊 CSS 來用 class 替代圖片，像這樣 <code>&lt;span class="sprite my-class"&gt;my icon&lt;/span&gt;</code></p>
+			</div>
+			<div class="grid_4 col box">
+				<pre id="sprites-css"></pre>
+			</div>
+			<div class="grid_6 col">
+				<h2>資料</h2>
+				<p>存這塊文字下次就可以重新產生圖片（貼到「貪心點兒」那塊）。</p>
+			</div>
+			<div class="grid_4 col box">
+				<pre id="sprites-data"></pre>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="visible-hack">
+	<ul id="images">
+	</ul>
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../script.js"></script>
+<!--<script type="text/javascript" src="../canvas2image.js" defer="defer"></script>
+<script type="text/javascript" src="../base64.js" defer="defer"></script>-->
+</body>
+</html>

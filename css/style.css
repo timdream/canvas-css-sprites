@@ -1,0 +1,156 @@
+@charset "UTF-8";
+
+html {
+	height: 100%;
+}
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	color: #eeeeee;
+	background: #333333 url(black-tie/images/ui-bg_diagonals-thick_8_333333_40x40.png) 50% 50% repeat;
+}
+
+
+#content {
+	position: relative;
+	width: 945px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+h1 {
+	position: absolute;
+	top: 20px;
+	left: 0;
+}
+
+.langsel {
+	position: absolute;
+	top: 30px;
+	right: 0;
+	font-weight: bold;
+	list-style: none;
+}
+
+.langsel li {
+	list-style: none;
+	float: left;
+	margin-left: 1em;
+}
+
+.langsel a {
+	font-weight: normal;
+	color: #cccccc;
+	text-decoration: none;
+}
+.langsel a:hover {
+	color: #fffff;
+	text-decoration: underline;
+}
+
+#tabs {
+	position: absolute;
+	top: 72px;
+	bottom: 20px;
+	width: 100%;
+}
+
+#tabs .ui-tabs-panel {
+	overflow: auto;
+	padding: 1em 0;
+	position: absolute;
+	top: 46px;
+	bottom: 4px;
+	width: 945px; /* scroll spaces */
+}
+
+form > * {
+	clear: both;
+}
+
+form > p > label, form > p > span {
+	margin-bottom: 20px;
+}
+
+.col {
+	margin-bottom: 20px;
+}
+
+.box {
+	height: 120px;
+	overflow: auto;
+	border: 1px dashed #999999;
+}
+
+.no-image {
+	font-weight: bold;
+}
+
+.ui-widget > .ui-icon {
+	float: left; margin: 4px 4px 3px;
+}
+
+#url, #urls {
+	font-family: monospace;
+	width: 80%;
+	white-space: nowrap;
+}
+
+#config-bgcolor, #config-spacingcolor {
+	font-family: monospace;
+}
+
+#demo-set textarea {
+	display: none;
+}
+
+#images-container {
+	height: 80%;
+	position: relative;
+	background-color: #cccccc;
+	overflow: auto;
+	border-color: #666666 #ffffff #ffffff #666666;
+	border-style: solid;
+	border-width: 2px;
+}
+
+#images {
+	display: block;
+	margin: 20px 0 0 20px;
+	padding: 0;
+	list-style: none;
+	border: 1px dashed #999999;
+}
+
+#visible-hack {
+	display: block;
+	position: absolute;
+	right: 0; bottom: 0;
+	width: 1px; height: 1px;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+.image-new-ok {
+	display: none;
+	font-weight: bold;
+}
+
+#images li {
+	float: left;
+	cursor: move;
+	margin: 0;
+	/*line-height: 1px /* size hack */
+	font: 10px/1px monospace;
+}
+
+/*#sprites-data, #sprites-css {
+	white-space: nowrap;
+}*/
+
+.transparent-checker {
+	background: #ffffff url('checker-16x16.png');
+}
+
+
