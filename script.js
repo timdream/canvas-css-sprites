@@ -44,13 +44,15 @@ var CanvasCS = {
 		$('#image-new').bind(
 			'submit',
 			function () {
-				var o = CanvasCS.SpriteImage($.trim($('#class-name').val()), $('#url').val());
+				if (!$.trim($('#url').val()) || !$.trim($('#class-name').val())) return false;
+				var o = CanvasCS.SpriteImage($.trim($('#class-name').val()), $.trim($('#url').val()));
 				$('#images').append(o);
 				o.find('img').attr('src', $('#url').val());
 				$('#url').val('');
 				$('#class-name').val('');
 				$('#images').sortable('refresh');
 				$('#image-new .image-new-ok').show().fadeOut(2000);
+				$('#url').focus();
 				return false;
 			}
 		);
@@ -81,6 +83,40 @@ var CanvasCS = {
 			}
 		);
 
+		/* adding local image */
+		if (window.FileReader || (window.File && window.File.prototype.getAsDataURL)) {
+			$('.no-file').hide();
+			$('#file').attr('disabled', false).bind(
+				'change',
+				function () {
+					if (!this.files.length) return;
+					var f = this.files[0];
+					var filename = (f.fileName || f.name).replace(/\.\w+$/, '');
+					if (window.FileReader) {
+						// FileReader
+						var reader = new FileReader();
+						reader.onloadend = function (ev) {
+							$('#url').val(ev.target.result);
+							$('#class-name').val(filename).focus();
+						};
+						reader.onerror = function () {
+							window.alert($('#file-error').val());
+						}
+						reader.readAsDataURL(f);
+					} else {
+						// Gecko (Fx30-35) non-standard method
+						try {
+							$('#url').val(f.getAsDataURL());
+							$('#class-name').val(filename).focus();
+						} catch (e) {
+							window.alert($('#file-error').val());
+						}
+					}
+					$('#image-file')[0].reset();
+				}
+			);
+		}
+		
 		/* demosets */
 		$('#demo-set input').bind(
 			'click',

@@ -97,9 +97,10 @@ _gaq.push(
 			<hr class="clear" />
 		</div>
 		<div id="addimage" class="container_10 ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+			<p class="no-file grid_10 ui-widget ui-state-highlight ui-corner-all"><span class="ui-icon ui-icon-info">[Info]</span> 您的瀏覽器不支援硬碟檔案讀取。</p>
 			<div class="grid_5">
-				<h2>一個一個來</h2>
-				<p>複製貼上圖片的網址，一個一個來。因為安全限制，您無法使用硬碟內的本地端圖片。</p>
+				<h2>一張一張來</h2>
+				<p>複製貼上圖片的網址，一張一張來。</p>
 				<form action="#" method="get" id="image-new">
 					<p>
 						<label class="alpha grid_1" for="url">網址</label>
@@ -122,7 +123,18 @@ _gaq.push(
 					<p><input type="submit" value="新增圖片" /> <span class="image-new-ok">OK！</span></p></p>
 				</form>
 			</div>
-			<div class="grid_10" id="demo-set">
+			<div class="grid_5" id="local-image">
+				<h2>硬碟裡的圖片</h2>
+				<p>在下方選擇檔案，檔案會被轉換成 Data URL 出現在上方的供您新增。</p>
+				<form action="#" method="get" id="image-file">
+					<input type="hidden" id="file-error" value="讀取檔案失敗。" />
+					<p>
+						<label class="alpha grid_1" for="file">檔案</label>
+						<span class="omega grid_4"><input type="file" value="" id="file" size="20" disabled="disabled"></span>
+					</p>
+				</form>
+			</div>
+			<div class="grid_5" id="demo-set">
 				<h2>預設圖片組</h2>
 				<ul>
 					<li>
