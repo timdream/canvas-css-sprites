@@ -68,7 +68,7 @@ _gaq.push(
 				<label for="config-hspacing">水平圖片間距</label>
 			</p>
 			<p class="grid_8 col">
-				<span class="alpha omega grid_8"><input type="text" size="5" id="config-hspacing" value="2" /> px</span>
+				<span class="alpha omega grid_8"><input type="number" size="5" id="config-hspacing" value="2" /> px</span>
 				<span class="alpha omega grid_8">如果您要將圖片用在此工具提供的 CSS 原始碼以外的用途的話，請確定水平間距夠大，以免遇到 Safari 的圖片重複 bug。</span>
 			</p>
 			<hr class="clear" />
@@ -76,14 +76,14 @@ _gaq.push(
 				<label for="config-vspacing">垂直圖片間距</label>
 			</p>
 			<p class="grid_8 col">
-				<span class="alpha omega grid_8"><input type="text" size="5" id="config-vspacing" value="2" /> px</span>
+				<span class="alpha omega grid_8"><input type="number" size="5" id="config-vspacing" value="2" /> px</span>
 			</p>
 			<h2 class="grid_10">彩色</h2>
 			<p class="grid_2 col">
 				<label for="config-bgcolor">背景彩色</label>
 			</p>
 			<p class="grid_8 col">
-				<span class="alpha omega grid_8"><input type="text" size="10" id="config-bgcolor" value="#ffffff" /></span>
+				<span class="alpha omega grid_8"><input type="color" size="10" id="config-bgcolor" value="#ffffff" /></span>
 				<label class="alpha omega grid_8"><input type="checkbox" id="config-bgcolor-transparent" checked="checked" /> 使用透明</label>
 			</p>
 			<hr class="clear" />
@@ -91,7 +91,7 @@ _gaq.push(
 				<label for="config-spacingcolor">間距彩色</label>
 			</p>
 			<p class="grid_8 col">
-				<span class="alpha omega grid_8"><input type="text" size="10" id="config-spacingcolor" value="#ffffff" /></span>
+				<span class="alpha omega grid_8"><input type="color" size="10" id="config-spacingcolor" value="#ffffff" /></span>
 				<label class="alpha omega grid_8"><input type="checkbox" id="config-spacingcolor-transparent" /> 使用透明</label>
 			</p>
 			<hr class="clear" />
@@ -104,7 +104,7 @@ _gaq.push(
 				<form action="#" method="get" id="image-new">
 					<p>
 						<label class="alpha grid_1" for="url">網址</label>
-						<span class="omega grid_4"><input type="text" value="" id="url" size="40"></span>
+						<span class="omega grid_4"><input type="url" value="" id="url" size="40"></span>
 					</p>
 					<p>
 						<label class="alpha grid_1" class="grid_2" for="class-name">className</label>
