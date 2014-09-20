@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <link rel="canonical" href="./en/" />
+  <title>Redirecting ...</title>
+</head>
+<body>
+<a href="./en/">Click here...</a>
+<script>
+
+var LanguageMatcher = function() {
+};
+
+LanguageMatcher.prototype.AVAILABLE_LANGUAGES = {
+  'en': 'en',
+  'zh-tw': 'zh-tw',
+  'zh-hant': 'zh-tw',
+  // Not mapping zh: 'zh-tw'
+};
+
+LanguageMatcher.prototype.DEFAULT_LANGUAGE = 'en';
+
+LanguageMatcher.prototype.match = function(navigator) {
+  navigator = navigator || window.navigator;
+
+  // Get user preferred languages
+  var languages = (navigator.languages || [
+    navigator.language || navigator.userLanguage || this.DEFAULT_LANGUAGE]);
+
+  // Convert them to lower case.
+  languages = languages.map(function(l) { return l.toLowerCase() });
+
+  var lang;
+
+  // Find exact match
+  lang = languages.find(function(l) {
+    return (l in this.AVAILABLE_LANGUAGES);
+  }, this);
+
+  if (lang) {
+    return lang;
+  }
+
+  // Find match of the lang code only
+  languages.some(function(l) {
+    var l0 = l.match(/^(\w+)(\-|$)/)[1];
+    if (l0 in this.AVAILABLE_LANGUAGES) {
+      lang = l0;
+      return true;
+    }
+    return false;
+  }, this);
+
+  if (lang) {
+    return lang;
+  }
+
+  // Fail safe
+  return this.DEFAULT_LANGUAGE;
+};
+
+LanguageMatcher.prototype.redirect = function(location) {
+  location = location || window.location;
+
+  var lang = this.match();
+  location.replace('./' + this.AVAILABLE_LANGUAGES[lang] + '/');
+};
+
+// Remove the unstyled link
+document.body.removeChild(document.body.firstElementChild);
+
+// Match and redirect
+var matcher = new LanguageMatcher();
+matcher.redirect();
+
+</script>
+</body>
+</html>
