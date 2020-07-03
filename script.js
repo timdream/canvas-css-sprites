@@ -14,7 +14,7 @@ var CanvasCS = {
 				}
 			}
 		);
-		
+
 		/* preview image tile */
 		$('#images')/*.draggable(
 			{
@@ -30,7 +30,7 @@ var CanvasCS = {
 				stop: CanvasCS.update
 			}
 		);
-		
+
 		$('#images li').live(
 			'dblclick',
 			function () {
@@ -116,7 +116,7 @@ var CanvasCS = {
 				}
 			);
 		}
-		
+
 		/* demosets */
 		$('#demo-set input').bind(
 			'click',
@@ -124,13 +124,13 @@ var CanvasCS = {
 				$('#urls').val($(this).prev().val()).focus();
 			}
 		);
-		
+
 		/* options form */
 		$('#options input').bind(
 			'change',
 			CanvasCS.update
 		);
-		
+
 		/* canvas2image */
 		/*$('#save-canvas').bind(
 			'click',
@@ -138,7 +138,7 @@ var CanvasCS = {
 				Canvas2Image.saveAsPNG($('#sprites').get(0));
 			}
 		);*/
-		
+
 		/* update for the first time */
 		CanvasCS.update();
 	},
@@ -172,21 +172,23 @@ var CanvasCS = {
 		return i;
 	},
 	update: function () {
+		window._paq && window._paq.push(['trackEvent', 'CanvasCS', 'update', '', 1]);
+
 		var $images = $('#images');
 		var $sprites = $('#sprites');
 		var transBg = $('#config-bgcolor-transparent').attr('checked');
-		var transSpacing = $('#config-spacingcolor-transparent').attr('checked');		
+		var transSpacing = $('#config-spacingcolor-transparent').attr('checked');
 
 		/* Disable color controls */
 		$('#config-bgcolor').attr('disabled', transBg);
 		$('#config-spacingcolor').attr('disabled', transSpacing);
-		
+
 		/* Element that never visible or never assigned doesn't have size */
 		var imDim = [
 			$images.width() || 200,
 			$images.height() || 100
 		]
-		
+
 		/* Change the css according to config */
 		$.each(
 			[$images, $sprites],
@@ -233,7 +235,7 @@ var CanvasCS = {
 		} else {
 			$('.no-image').show();
 		}
-		
+
 		$images.find('li').each(
 			function (i) {
 				if (i === 0) {
